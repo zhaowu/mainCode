@@ -17,6 +17,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 //add from local
+//add from web
 public class SnakeGame {
         public static void main(String[] args) {
                 SnakeFrame frame = new SnakeFrame();
@@ -25,7 +26,7 @@ public class SnakeGame {
         }
 }
 
-// ----------¼ÇÂ¼×´Ì¬µÄÏß³Ì
+// ----------è®°å½•çŠ¶æ€çš„çº¿ç¨‹
 class StatusRunnable implements Runnable {
         public StatusRunnable(Snake snake, JLabel statusLabel, JLabel scoreLabel) {
                 this.statusLabel = statusLabel;
@@ -63,7 +64,7 @@ class StatusRunnable implements Runnable {
         private Snake snake;
 }
 
-// ----------ÉßÔË¶¯ÒÔ¼°¼ÇÂ¼·ÖÊıµÄÏß³Ì
+// ----------è›‡è¿åŠ¨ä»¥åŠè®°å½•åˆ†æ•°çš„çº¿ç¨‹
 class SnakeRunnable implements Runnable {
         public SnakeRunnable(Snake snake, Component component) {
                 this.snake = snake;
@@ -86,10 +87,10 @@ class SnakeRunnable implements Runnable {
 }
 
 class Snake {
-        boolean isRun;// ---------ÊÇ·ñÔË¶¯ÖĞ
-        ArrayList<Node> body;// -----ÉßÌå
-        Node food;// --------Ê³Îï
-        int derection;// --------·½Ïò
+        boolean isRun;// ---------æ˜¯å¦è¿åŠ¨ä¸­
+        ArrayList<Node> body;// -----è›‡ä½“
+        Node food;// --------é£Ÿç‰©
+        int derection;// --------æ–¹å‘
         int score;
         int status;
         int speed;
@@ -117,8 +118,8 @@ class Snake {
                 makeFood();
         }
 
-        // ------------ÅĞ¶ÏÊ³ÎïÊÇ·ñ±»Éß³Ôµô
-        // -------Èç¹ûÊ³ÎïÔÚÉßÔËĞĞ·½ÏòµÄÕıÇ°·½£¬²¢ÇÒÓëÉßÍ·½Ó´¥£¬Ôò±»³Ôµô
+        // ------------åˆ¤æ–­é£Ÿç‰©æ˜¯å¦è¢«è›‡åƒæ‰
+        // -------å¦‚æœé£Ÿç‰©åœ¨è›‡è¿è¡Œæ–¹å‘çš„æ­£å‰æ–¹ï¼Œå¹¶ä¸”ä¸è›‡å¤´æ¥è§¦ï¼Œåˆ™è¢«åƒæ‰
         private boolean isEaten() {
                 Node head = body.get(0);
                 if (derection == Snake.RIGHT && (head.x + Node.W) == food.x
@@ -137,10 +138,10 @@ class Snake {
                         return false;
         }
 
-        // ----------ÊÇ·ñÅö×²
+        // ----------æ˜¯å¦ç¢°æ’
         private boolean isCollsion() {
                 Node node = body.get(0);
-                // ------------Åö±Ú
+                // ------------ç¢°å£
                 if (derection == Snake.RIGHT && node.x == 280)
                         return true;
                 if (derection == Snake.UP && node.y == 0)
@@ -149,7 +150,7 @@ class Snake {
                         return true;
                 if (derection == Snake.DOWN && node.y == 380)
                         return true;
-                // --------------ÉßÍ·Åöµ½ÉßÉí
+                // --------------è›‡å¤´ç¢°åˆ°è›‡èº«
                 Node temp = null;
                 int i = 0;
                 for (i = 3; i < body.size(); i++) {
@@ -163,7 +164,7 @@ class Snake {
                         return false;
         }
 
-        // -------ÔÚËæ»úµÄµØ·½²úÉúÊ³Îï
+        // -------åœ¨éšæœºçš„åœ°æ–¹äº§ç”Ÿé£Ÿç‰©
         public void makeFood() {
                 Node node = new Node(0, 0);
                 boolean isInBody = true;
@@ -187,26 +188,26 @@ class Snake {
                 food = new Node(X, Y);
         }
 
-        // ---------¸Ä±äÔËĞĞ·½Ïò
+        // ---------æ”¹å˜è¿è¡Œæ–¹å‘
         public void changeDerection(int newDer) {
-                if (derection % 2 != newDer % 2)// -------Èç¹ûÓëÔ­À´·½ÏòÏàÍ¬»òÏà·´£¬ÔòÎŞ·¨¸Ä±ä
+                if (derection % 2 != newDer % 2)// -------å¦‚æœä¸åŸæ¥æ–¹å‘ç›¸åŒæˆ–ç›¸åï¼Œåˆ™æ— æ³•æ”¹å˜
                         derection = newDer;
         }
 
         public void move() {
-                if (isEaten()) {// -----Èç¹ûÊ³Îï±»³Ôµô
-                        body.add(0, food);// --------°ÑÊ³Îïµ±³ÉÉßÍ·³ÉÎªĞÂµÄÉßÌå
+                if (isEaten()) {// -----å¦‚æœé£Ÿç‰©è¢«åƒæ‰
+                        body.add(0, food);// --------æŠŠé£Ÿç‰©å½“æˆè›‡å¤´æˆä¸ºæ–°çš„è›‡ä½“
                         score += 10;
-                        makeFood();// --------²úÉúÊ³Îï
-                } else if (isCollsion())// ---------Èç¹ûÅö±Ú»ò×ÔÉí
+                        makeFood();// --------äº§ç”Ÿé£Ÿç‰©
+                } else if (isCollsion())// ---------å¦‚æœç¢°å£æˆ–è‡ªèº«
                 {
                         isRun = false;
-                        status = Snake.GAMEOVER;// -----½áÊø
-                } else if (isRun) {// ----Õı³£ÔËĞĞ£¨²»³ÔÊ³Îï£¬²»Åö±Ú£¬²»Åö×ÔÉí£©
+                        status = Snake.GAMEOVER;// -----ç»“æŸ
+                } else if (isRun) {// ----æ­£å¸¸è¿è¡Œï¼ˆä¸åƒé£Ÿç‰©ï¼Œä¸ç¢°å£ï¼Œä¸ç¢°è‡ªèº«ï¼‰
                         Node node = body.get(0);
                         int X = node.x;
                         int Y = node.y;
-                        // ------------ÉßÍ·°´ÔËĞĞ·½ÏòÇ°½øÒ»¸öµ¥Î»
+                        // ------------è›‡å¤´æŒ‰è¿è¡Œæ–¹å‘å‰è¿›ä¸€ä¸ªå•ä½
                         switch (derection) {
                         case 1:
                                 X -= Node.W;
@@ -222,13 +223,13 @@ class Snake {
                                 break;
                         }
                         body.add(0, new Node(X, Y));
-                        // ---------------È¥µôÉßÎ²
+                        // ---------------å»æ‰è›‡å°¾
                         body.remove(body.size() - 1);
                 }
         }
 }
 
-// ---------×é³ÉÉßÉíµÄµ¥Î»£¬Ê³Îï
+// ---------ç»„æˆè›‡èº«çš„å•ä½ï¼Œé£Ÿç‰©
 class Node {
         public static final int W = 20;
         public static final int H = 20;
@@ -241,7 +242,7 @@ class Node {
         }
 }
 
-// ------»­°å
+// ------ç”»æ¿
 class SnakePanel extends JPanel {
         Snake snake;
 
@@ -252,13 +253,13 @@ class SnakePanel extends JPanel {
         public void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 Node node = null;
-                for (int i = 0; i < snake.body.size(); i++) {// ---ºìÀ¶¼ä¸ô»­ÉßÉí
+                for (int i = 0; i < snake.body.size(); i++) {// ---çº¢è“é—´éš”ç”»è›‡èº«
                         if (i % 2 == 0)
                                 g.setColor(Color.blue);
                         else
                                 g.setColor(Color.yellow);
                         node = snake.body.get(i);
-                        g.fillRect(node.x, node.y, node.H, node.W);// *******************ÊÔÓÃ*********************
+                        g.fillRect(node.x, node.y, node.H, node.W);// *******************è¯•ç”¨*********************
                 }
                 node = snake.food;
                 g.setColor(Color.red);
@@ -296,7 +297,7 @@ class SnakeFrame extends JFrame {
                                 if (e.getSource() == newItem) {
                                         newGame();
                                 }
-                                // ------------²Ëµ¥¿ØÖÆÔËĞĞËÙ¶È
+                                // ------------èœå•æ§åˆ¶è¿è¡Œé€Ÿåº¦
                                 if (e.getSource() == slowItem) {
                                         snake.speed = Snake.SLOW;
                                         speedLabel.setText("Slow");
@@ -321,7 +322,7 @@ class SnakeFrame extends JFrame {
                 addKeyListener(new KeyListener() {
                         public void keyPressed(KeyEvent e) {
                                 switch (e.getKeyCode()) {
-                                // ------------·½Ïò¼ü¸Ä±äÉßÔËĞĞ·½Ïò
+                                // ------------æ–¹å‘é”®æ”¹å˜è›‡è¿è¡Œæ–¹å‘
                                 case KeyEvent.VK_DOWN:// 
                                         snake.changeDerection(Snake.DOWN);
                                         break;
@@ -334,7 +335,7 @@ class SnakeFrame extends JFrame {
                                 case KeyEvent.VK_RIGHT:// 
                                         snake.changeDerection(Snake.RIGHT);
                                         break;
-                                // ¿Õ¸ñ¼ü£¬ÓÎÏ·ÔİÍ£»ò¼ÌĞø
+                                // ç©ºæ ¼é”®ï¼Œæ¸¸æˆæš‚åœæˆ–ç»§ç»­
                                 case KeyEvent.VK_SPACE:// 
                                         if (snake.isRun == true) {
                                                 snake.isRun = false;
@@ -395,13 +396,13 @@ class SnakeFrame extends JFrame {
                 add(statusLabel);
                 scoreLabel.setBounds(300, 20, 60, 20);
                 add(scoreLabel);
-                JLabel temp = new JLabel("×´Ì¬");
+                JLabel temp = new JLabel("çŠ¶æ€");
                 temp.setBounds(310, 5, 60, 20);
                 add(temp);
-                temp = new JLabel("·ÖÊı");
+                temp = new JLabel("åˆ†æ•°");
                 temp.setBounds(310, 105, 60, 20);
                 add(temp);
-                temp = new JLabel("ËÙ¶È");
+                temp = new JLabel("é€Ÿåº¦");
                 temp.setBounds(310, 55, 60, 20);
                 add(temp);
                 speedLabel.setBounds(310, 75, 60, 20);
