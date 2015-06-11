@@ -2,7 +2,7 @@ package test;
 
 import acm.program.*;
 
-public class midterm extends ConsoleProgram {
+public class Midterm extends ConsoleProgram {
 	public void run() {
 		String s1 = "To err";
 		String s2 = "is human!";
